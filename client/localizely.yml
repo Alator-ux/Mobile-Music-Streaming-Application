@@ -1,0 +1,21 @@
+config_version: 1.0
+project_id: f6229270-3a8d-4f4b-bcd3-6aa3946ed87f
+file_type: flutter_arb
+branch: main
+
+upload:
+  files:
+    - file: lib/l10n/app_ru.arb
+      locale_code: ru
+  params:
+    overwrite: true
+    reviewed: false
+
+download:
+  files:
+    - file: lib/l10n/app_ru.arb
+      locale_code: ru
+    - file: lib/l10n/app_en.arb
+      locale_code: en
+  params:
+    export_empty_as: main

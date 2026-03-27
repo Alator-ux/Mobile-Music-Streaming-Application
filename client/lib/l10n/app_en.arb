@@ -1,0 +1,7 @@
+{
+  "@@locale": "en",
+  "greetings": "Hello, world!",
+  "@greetings": {
+    "description": "Greetings for programmers"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "@@locale": "ru",
+  "greetings": "Привет, мир!",
+  "@greetings": {
+    "description": "Приветсвие для программистов"
+  }
+}
