@@ -27,3 +27,11 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+data/
+minio_data/
+tracks/
+
+*.log
+.DS_Store
+Thumbs.db
