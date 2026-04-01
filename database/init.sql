@@ -96,20 +96,20 @@ INSERT INTO genres (name) VALUES
 -- =========================
 -- DATA: ARTISTS
 -- =========================
-INSERT INTO artists (name) VALUES
-('Rafael Archangel'),
-('HoliznaCC0'),
-('Amarent'),
-('Tea K Pea'),
-('TV Girl'),
-('Coolzey'),
-('BenJamin Banger'),
-('Dee Yan-Key'),
-('Taylor & Lopker'),
-('<1'),
-('António Bizarro'),
-('Kosta T'),
-('Генри Бэсхэ');
+INSERT INTO artists (name, country) VALUES
+('Rafael Archangel', 'USA'),
+('HoliznaCC0', 'USA'),
+('Amarent', 'France'),
+('Tea K Pea', 'USA'),
+('TV Girl', 'USA'),
+('Coolzey', 'USA'),
+('BenJamin Banger', 'USA'),
+('Dee Yan-Key', 'USA'),
+('Taylor & Lopker', 'USA'),
+('<1', 'Unknown'),
+('António Bizarro', 'Portugal'),
+('Kosta T', 'Russia'),
+('Генри Бэсхэ', 'Russia');
 
 -- =========================
 -- DATA: TRACKS
