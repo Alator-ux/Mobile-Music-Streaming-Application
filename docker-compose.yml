@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:16
@@ -5,51 +7,46 @@ services:
     restart: always
     env_file:
       - .env
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5433:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
-      interval: 1s
-      timeout: 1s
-      retries: 10
+      - db_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   minio:
     image: minio/minio
     container_name: minio
     command: server /data --console-address ":9001"
     restart: always
+    env_file:
+      - .env
     ports:
       - "9000:9000"
       - "9001:9001"
-    environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     volumes:
-      - ./minio_data:/data
+      - minio_data:/data
 
   minio-seed:
     image: minio/mc
     container_name: minio-seed
     depends_on:
       - minio
+    env_file:
+      - .env
     volumes:
-      - ./tracks:/tracks
+      - ./database/tracks:/tracks
     entrypoint: >
       /bin/sh -c "
-      echo '⏳ Waiting for MinIO...';
-      sleep 5;
-      mc alias set local http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
-      mc mb local/${MINIO_BUCKET} || true;
-      mc anonymous set public local/${MINIO_BUCKET};
-      echo '📦 Uploading tracks...';
-      mc cp --recursive /tracks local/${MINIO_BUCKET};
-      echo '✅ Done';
-      exit 0;
+      echo '⏳ Waiting for MinIO...' &&
+      sleep 5 &&
+      mc alias set local http://minio:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD &&
+      mc mb local/${MINIO_BUCKET} || true &&
+      mc anonymous set public local/${MINIO_BUCKET} &&
+      echo '📦 Uploading tracks...' &&
+      mc mirror /tracks local/${MINIO_BUCKET} &&
+      echo '✅ Done'
       "
+
+volumes:
+  db_data:
+  minio_data:
