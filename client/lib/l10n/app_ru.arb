@@ -3,5 +3,39 @@
   "greetings": "Привет, мир!",
   "@greetings": {
     "description": "Приветсвие для программистов"
-  }
+  },
+  "header_login": "Войти в аккаунт",
+  "header_signup": "Регистрация",
+  "name_label": "Имя или никнейм",
+  "email_label": "Электронная почта",
+  "password_label": "Пароль",
+  "password_confirm_label": "Подтвердите пароль",
+
+  "login_label": "Логин",
+  "button_submit": "Войти",
+  "button_signup": "Зарегистрироваться",
+
+  "empty_field": "Поле не должно быть пустым!",
+  "passwords_dont_match": "Пароли не совпадают!",
+  "no_account": "Нет аккаунта? ",
+  "already_have_account": "Уже зарегистрированы? ",
+  "button_login": "Войти",
+
+  "invalid_email": "Введите корректный адрес электронной почты!",
+  "password_too_weak": "Пароль должен содержать минимум 8 символов, включая заглавные и строчные буквы, цифры и специальные символы.",
+
+  "language": "Язык",
+  "theme": "Тема",
+
+  "theme_system": "Системная",
+  "theme_light": "Светлая",
+  "theme_dark": "Темная",
+
+  "tab_tracks": "Треки",
+  "tab_favorites": "Избранное",
+  "playlist": "Плейлист",
+
+  "nav_home": "Главная",
+  "nav_favorites": "Избранное",
+  "nav_profile": "Профиль"
 }
