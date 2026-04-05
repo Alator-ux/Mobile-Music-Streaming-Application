@@ -1,4 +1,8 @@
+import 'package:client/data/datasources/local/auth_storage.dart';
 import 'package:client/extensions/context_extensions.dart';
+import 'package:client/presentation/controllers/profile_controller.dart';
+import 'package:client/presentation/screens/login/login_screen.dart';
+import 'package:client/presentation/widgets/custom_button.dart';
 import 'package:client/presentation/widgets/settings_picker.dart';
 import 'package:client/providers/locale_provider.dart';
 import 'package:client/providers/theme_provider.dart';
@@ -13,6 +17,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final _controller = ProfileController();
+
   String _getThemeName(ThemeMode mode) {
     switch (mode) {
       case ThemeMode.system:
@@ -22,6 +28,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case ThemeMode.dark:
         return context.l10n.theme_dark;
     }
+  }
+
+  @override
+  void initState() {
+    _controller.loadProfile();
+    super.initState();
   }
 
   @override
@@ -35,7 +47,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         spacing: 8,
         children: [
           Icon(Icons.account_circle, size: 170),
-          Text('username', style: theme.textTheme.headlineMedium,),
+          ListenableBuilder(
+            listenable: _controller,
+            builder: (BuildContext context, Widget? child) {
+              if (_controller.isLoading) {
+                return const CircularProgressIndicator();
+              }
+              final user = _controller.currentUser;
+
+              return Text(
+                user?.login ?? '',
+                style: theme.textTheme.headlineMedium,
+              );
+            },
+          ),
           SettingsPicker<Locale>(
             initialValue: localeProvider.locale,
             buttonLabel:
@@ -68,6 +93,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: Icons.dark_mode,
               ),
             ],
+          ),
+          CustomButton(
+            content: .text(context.l10n.logout),
+            onPressed: () async {
+              await AuthStorage().clear();
+              if (!context.mounted) return;
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => LoginScreen()),
+                (Route<dynamic> route) => false,
+              );
+            },
           ),
         ],
       ),

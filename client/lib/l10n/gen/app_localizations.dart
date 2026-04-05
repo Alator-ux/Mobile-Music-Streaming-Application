@@ -265,6 +265,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get nav_profile;
+
+  /// No description provided for @error_email_already_registered.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already registered.'**
+  String get error_email_already_registered;
+
+  /// No description provided for @error_incorrect_credentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect email or password.'**
+  String get error_incorrect_credentials;
+
+  /// No description provided for @error_invalid_token.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not validate credentials or session expired.'**
+  String get error_invalid_token;
+
+  /// No description provided for @error_db_connection.
+  ///
+  /// In en, this message translates to:
+  /// **'Database connection failed.'**
+  String get error_db_connection;
+
+  /// No description provided for @error_unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again later.'**
+  String get error_unknown;
+
+  /// No description provided for @error_user_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found.'**
+  String get error_user_not_found;
+
+  /// No description provided for @error_unauthorized.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorization failed. Check your credentials.'**
+  String get error_unauthorized;
+
+  /// No description provided for @error_server_internal.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal server error. We are working on it!'**
+  String get error_server_internal;
+
+  /// No description provided for @error_no_internet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection.'**
+  String get error_no_internet;
+
+  /// No description provided for @error_bad_request.
+  ///
+  /// In en, this message translates to:
+  /// **'Bad request.'**
+  String get error_bad_request;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
 }
 
 class _AppLocalizationsDelegate

@@ -37,5 +37,19 @@
 
   "nav_home": "Главная",
   "nav_favorites": "Избранное",
-  "nav_profile": "Профиль"
+  "nav_profile": "Профиль",
+
+  "error_email_already_registered": "Этот адрес электронной почты уже зарегистрирован.",
+  "error_incorrect_credentials": "Неверный email или пароль.",
+  "error_invalid_token": "Сессия истекла или недействительна. Войдите снова.",
+  "error_db_connection": "Ошибка подключения к базе данных.",
+  "error_unknown": "Произошла непредвиденная ошибка. Попробуйте позже.",
+  "error_user_not_found": "Пользователь не найден.",
+  "error_unauthorized": "Ошибка авторизации. Проверьте данные.",
+  "error_server_internal": "Ошибка на стороне сервера. Мы уже чиним!",
+  "error_no_internet": "Проблемы с интернет-соединением.",
+  "error_bad_request": "Некорректный запрос.",
+
+  "retry": "Повторить",
+  "logout": "Выйти из аккаунта"
 }

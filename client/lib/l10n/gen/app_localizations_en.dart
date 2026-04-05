@@ -92,4 +92,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nav_profile => 'Profile';
+
+  @override
+  String get error_email_already_registered => 'Email already registered.';
+
+  @override
+  String get error_incorrect_credentials => 'Incorrect email or password.';
+
+  @override
+  String get error_invalid_token =>
+      'Could not validate credentials or session expired.';
+
+  @override
+  String get error_db_connection => 'Database connection failed.';
+
+  @override
+  String get error_unknown =>
+      'An unexpected error occurred. Please try again later.';
+
+  @override
+  String get error_user_not_found => 'User not found.';
+
+  @override
+  String get error_unauthorized =>
+      'Authorization failed. Check your credentials.';
+
+  @override
+  String get error_server_internal =>
+      'Internal server error. We are working on it!';
+
+  @override
+  String get error_no_internet => 'No internet connection.';
+
+  @override
+  String get error_bad_request => 'Bad request.';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get logout => 'Logout';
 }

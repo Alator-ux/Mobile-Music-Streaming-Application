@@ -1,3 +1,5 @@
+import 'package:client/main.dart';
+import 'package:client/presentation/controllers/audio_player_controller.dart';
 import 'package:flutter/material.dart';
 
 class TrackInfo extends StatelessWidget {
@@ -6,24 +8,33 @@ class TrackInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = getIt<AudioPlayerController>();
 
-    return Row(
-      mainAxisAlignment: .spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: .start,
+    return ValueListenableBuilder(
+      valueListenable: controller.currentTrackNotifier,
+      builder: (context, value, child) {
+        return Row(
+          mainAxisAlignment: .spaceBetween,
           children: [
-            Text('5k ELO', style: theme.textTheme.headlineMedium),
-            Text('ALBLAK 52', style: theme.textTheme.titleMedium),
+            Column(
+              crossAxisAlignment: .start,
+              children: [
+                Text(value!.title, style: theme.textTheme.headlineMedium),
+                Text(value.artist, style: theme.textTheme.titleMedium),
+              ],
+            ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.favorite_outline),
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+              ],
+            ),
           ],
-        ),
-        Row(
-          children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.favorite_outline)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
-          ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

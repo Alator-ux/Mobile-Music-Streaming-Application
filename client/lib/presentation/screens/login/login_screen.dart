@@ -7,6 +7,7 @@ import 'package:client/presentation/widgets/auth_navigation_text.dart';
 import 'package:client/presentation/widgets/custom_button.dart';
 import 'package:client/presentation/widgets/custom_text_form_field.dart';
 import 'package:client/presentation/widgets/hide_password_button.dart';
+import 'package:client/utils/api_helpers.dart';
 import 'package:client/utils/form_validators.dart';
 import 'package:client/utils/messenger.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
       if (state is AuthError) {
-        Messenger.showError(context, state.message);
+        Messenger.showError(context, getLocalizedError(state.message, context));
       }
     });
     super.initState();

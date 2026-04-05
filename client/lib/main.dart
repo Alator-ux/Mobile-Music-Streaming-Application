@@ -1,25 +1,46 @@
+import 'package:client/data/datasources/local/auth_storage.dart';
 import 'package:client/l10n/gen/app_localizations.dart';
+import 'package:client/presentation/controllers/audio_player_controller.dart';
 import 'package:client/presentation/screens/login/login_screen.dart';
 import 'package:client/providers/locale_provider.dart';
 import 'package:client/providers/theme_provider.dart';
 import 'package:client/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'presentation/screens/home/home_screen.dart';
+
+final getIt = GetIt.instance;
+
+void setupServiceLocator() {
+  getIt.registerLazySingleton<AudioPlayerController>(
+    () => AudioPlayerController(),
+  );
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
+
+  final token = await AuthStorage().getToken();
+  final bool isLoggedIn = token != null && token.isNotEmpty;
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
-      child: const TestApp(),
+      child: TestApp(isLoggedIn: isLoggedIn),
     ),
   );
 }
 
 class TestApp extends StatelessWidget {
-  const TestApp({super.key});
+  final bool isLoggedIn;
+
+  const TestApp({super.key, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +53,7 @@ class TestApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.themeMode,
-      home: LoginScreen(),
+      home: isLoggedIn ? const HomeScreen() : const LoginScreen(),
     );
   }
 }
