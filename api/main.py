@@ -1,9 +1,10 @@
-import os
+﻿import os
 import jwt
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -11,6 +12,11 @@ from psycopg2.extras import RealDictCursor
 load_dotenv()
 
 app = FastAPI(title="Music Streaming API")
+script_dir = os.path.dirname(__file__)
+rel_path = "../database/tracks"
+abs_file_path = os.path.join(script_dir, rel_path)
+
+app.mount("/tracks", StaticFiles(directory=abs_file_path), name="tracks")
 
 # Конфигурация БД
 DB_CONFIG = {
@@ -109,7 +115,10 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
         
     access_token = create_access_token(data={"sub": str(user["id"])})
     
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "user": {
+            "name": user["name"],
+            "email": user["email"]
+        }}
 
 @app.get("/users/me", tags=["Users"])
 def get_my_profile(current_user_id: str = Depends(get_current_user)):
@@ -129,7 +138,16 @@ def get_my_profile(current_user_id: str = Depends(get_current_user)):
 def get_tracks():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tracks;")
+    query = """
+        SELECT 
+            t.*, 
+            ARRAY_AGG(a.name) as artists
+        FROM tracks t
+        LEFT JOIN track_artists ta ON t.id = ta.track_id
+        LEFT JOIN artists a ON ta.artist_id = a.id
+        GROUP BY t.id;
+    """
+    cur.execute(query)
     tracks = cur.fetchall()
     cur.close()
     conn.close()

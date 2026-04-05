@@ -1,38 +1,60 @@
+import 'package:client/data/models/track.dart';
+import 'package:client/main.dart';
+import 'package:client/presentation/controllers/audio_player_controller.dart';
+import 'package:client/utils/duration_formatter.dart';
 import 'package:flutter/material.dart';
 
-class TrackWidget extends StatefulWidget {
-  const TrackWidget({super.key});
+class TrackWidget extends StatelessWidget {
+  final Track track;
+  final int index;
+  final List<Track> playlist;
 
-  @override
-  State<TrackWidget> createState() => _TrackWidgetState();
-}
+  const TrackWidget({
+    super.key,
+    required this.track,
+    required this.playlist,
+    required this.index,
+  });
 
-class _TrackWidgetState extends State<TrackWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = getIt<AudioPlayerController>();
     return ListTile(
       contentPadding: const .only(left: 5),
-      title: Text('5k ELO', style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),),
-      subtitle: Text('ALBLAK 52', style: theme.textTheme.bodyMedium,),
+      title: Text(
+        track.title,
+        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+        overflow: .ellipsis,
+      ),
+      subtitle: Text(
+        track.artist,
+        style: theme.textTheme.bodyMedium,
+        overflow: .ellipsis,
+      ),
       leading: AspectRatio(
         aspectRatio: 1,
         child: ClipRRect(
           borderRadius: .circular(4),
           child: Image.network(
-            'https://t2.genius.com/unsafe/430x430/https%3A%2F%2Fimages.genius.com%2Ff71c66885ab455155421ca924a4e9854.1000x1000x1.png',
+            track.coverUrl,
             fit: .cover,
+            errorBuilder: (_, _, _) {
+              return const Icon(Icons.music_note);
+            },
           ),
         ),
       ),
       trailing: Row(
         mainAxisSize: .min,
         children: [
-          Text('2:06'),
+          Text(formatDuration(Duration(seconds: track.duration))),
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        controller.playSpecificTrack(playlist, index);
+      },
     );
   }
 }

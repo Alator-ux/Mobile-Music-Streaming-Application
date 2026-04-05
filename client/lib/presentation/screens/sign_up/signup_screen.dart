@@ -6,6 +6,7 @@ import 'package:client/presentation/widgets/auth_navigation_text.dart';
 import 'package:client/presentation/widgets/custom_button.dart';
 import 'package:client/presentation/widgets/custom_text_form_field.dart';
 import 'package:client/presentation/widgets/hide_password_button.dart';
+import 'package:client/utils/api_helpers.dart';
 import 'package:client/utils/form_validators.dart';
 import 'package:client/utils/messenger.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       }
       if (state is AuthError) {
-        Messenger.showError(context, state.message);
+        Messenger.showError(context, getLocalizedError(state.message, context));
       }
     });
     super.initState();
@@ -115,11 +116,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       );
                     },
                   ),
-                  CustomButton(
-                    content: _controller.isLoading
-                        ? CustomButtonContent.loading()
-                        : CustomButtonContent.text(context.l10n.button_signup),
-                    onPressed: () async => await _controller.signUp(_formKey),
+                  ListenableBuilder(
+                    listenable: _controller,
+                    builder: (BuildContext context, Widget? child) {
+                      final buttonContent = _controller.isLoading
+                          ? const CustomButtonContent.loading()
+                          : CustomButtonContent.text(
+                              context.l10n.button_signup,
+                            );
+                      return CustomButton(
+                        content: buttonContent,
+                        onPressed: () async =>
+                            await _controller.signUp(_formKey),
+                      );
+                    },
                   ),
                   AuthNavigationText(
                     questionText: context.l10n.already_have_account,

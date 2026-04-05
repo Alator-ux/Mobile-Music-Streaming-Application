@@ -10,32 +10,37 @@
   "email_label": "Email address",
   "password_label": "Password",
   "password_confirm_label": "Confirm password",
-
   "login_label": "Username",
   "button_submit": "Log In",
   "button_signup": "Sign up",
-
   "empty_field": "The field must not be empty!",
   "passwords_dont_match": "Passwords do not match!",
   "no_account": "Don’t have an account? ",
   "already_have_account": "Already have an account? ",
   "button_login": "Log in",
-
   "invalid_email": "Please enter a valid email address!",
   "password_too_weak": "Password must be 8+ chars, with Uppercase, Lowercase, Number, and Special Char.",
-
   "language": "Language",
   "theme": "Theme",
-
   "theme_system": "System",
   "theme_light": "Light",
   "theme_dark": "Dark",
-
   "tab_tracks": "Tracks",
   "tab_favorites": "Favorites",
   "playlist": "Playlist",
-
   "nav_home": "Home",
   "nav_favorites": "Favorites",
-  "nav_profile": "Profile"
+  "nav_profile": "Profile",
+  "error_email_already_registered": "Email already registered.",
+  "error_incorrect_credentials": "Incorrect email or password.",
+  "error_invalid_token": "Could not validate credentials or session expired.",
+  "error_db_connection": "Database connection failed.",
+  "error_unknown": "An unexpected error occurred. Please try again later.",
+  "error_user_not_found": "User not found.",
+  "error_unauthorized": "Authorization failed. Check your credentials.",
+  "error_server_internal": "Internal server error. We are working on it!",
+  "error_no_internet": "No internet connection.",
+  "error_bad_request": "Bad request.",
+  "retry": "Retry",
+  "logout": "Logout"
 }

@@ -1,4 +1,7 @@
+import 'package:client/main.dart';
+import 'package:client/presentation/controllers/audio_player_controller.dart';
 import 'package:client/presentation/screens/home/full_screen_player/full_screen_player.dart';
+import 'package:client/presentation/widgets/play_pause_button.dart';
 import 'package:flutter/material.dart';
 
 class MiniPlayer extends StatelessWidget {
@@ -6,57 +9,77 @@ class MiniPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = getIt<AudioPlayerController>();
+
     final theme = Theme.of(context);
-    return InkWell(
-      onTap: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          useSafeArea: true,
-          context: context,
-          builder: (context) => FullScreenPlayer(),
-        );
-      },
-      child: SizedBox(
-        height: 50,
-        child: DecoratedBox(
-          decoration: BoxDecoration(),
-          child: Stack(
-            alignment: .center,
-            children: [
-              Row(
-                mainAxisAlignment: .spaceBetween,
+    return ValueListenableBuilder(
+      valueListenable: controller.currentTrackNotifier,
+      builder: (context, value, child) {
+        if (value == null) return const SizedBox.shrink();
+        return InkWell(
+          onTap: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => FullScreenPlayer(),
+            );
+          },
+          child: SizedBox(
+            height: 50,
+            child: DecoratedBox(
+              decoration: BoxDecoration(),
+              child: Stack(
+                alignment: .center,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.play_arrow)),
                   Row(
+                    mainAxisAlignment: .spaceBetween,
                     children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.favorite_outline),
+                      ValueListenableBuilder(
+                        valueListenable: controller.buttonNotifier,
+                        builder: (context, value, child) {
+                          return PlayPauseButton(
+                            state: value,
+                            onPlay: controller.play,
+                            onPause: controller.pause,
+                            size: 24,
+                          );
+                        },
                       ),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.close)),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.favorite_outline),
+                          ),
+                          IconButton(
+                            onPressed: controller.stop,
+                            icon: Icon(Icons.close),
+                          ),
+                        ],
+                      ),
                     ],
+                  ),
+                  IgnorePointer(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          value.title,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(value.artist, style: theme.textTheme.bodySmall),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              IgnorePointer(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '5k ELO',
-                      style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'ALBLAK 52',
-                      style: theme.textTheme.bodySmall,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

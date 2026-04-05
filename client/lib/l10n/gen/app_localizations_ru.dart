@@ -92,4 +92,44 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nav_profile => 'Профиль';
+
+  @override
+  String get error_email_already_registered =>
+      'Этот адрес электронной почты уже зарегистрирован.';
+
+  @override
+  String get error_incorrect_credentials => 'Неверный email или пароль.';
+
+  @override
+  String get error_invalid_token =>
+      'Сессия истекла или недействительна. Войдите снова.';
+
+  @override
+  String get error_db_connection => 'Ошибка подключения к базе данных.';
+
+  @override
+  String get error_unknown =>
+      'Произошла непредвиденная ошибка. Попробуйте позже.';
+
+  @override
+  String get error_user_not_found => 'Пользователь не найден.';
+
+  @override
+  String get error_unauthorized => 'Ошибка авторизации. Проверьте данные.';
+
+  @override
+  String get error_server_internal =>
+      'Ошибка на стороне сервера. Мы уже чиним!';
+
+  @override
+  String get error_no_internet => 'Проблемы с интернет-соединением.';
+
+  @override
+  String get error_bad_request => 'Некорректный запрос.';
+
+  @override
+  String get retry => 'Повторить';
+
+  @override
+  String get logout => 'Выйти из аккаунта';
 }
