@@ -132,4 +132,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get logout => 'Выйти из аккаунта';
+
+  @override
+  String get search_hint => 'Поиск треков...';
+
+  @override
+  String get no_search_results => 'Ничего не найдено';
+
+  @override
+  String get try_change_query => 'Попробуйте изменить поисковый запрос';
+
+  @override
+  String get enter_track_or_artist => 'Введите название трека или исполнителя';
 }

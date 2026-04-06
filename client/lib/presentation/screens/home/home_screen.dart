@@ -44,8 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black12,
         actions: [
           IconButton(
-            onPressed: () =>
-                showSearch(context: context, delegate: TrackSearchDelegate()),
+            onPressed: () => showSearch(
+              context: context, 
+              delegate: TrackSearchDelegate(
+                trackListController: _trackListController,
+              ),
+            ),
             icon: const Icon(Icons.search),
           ),
         ],

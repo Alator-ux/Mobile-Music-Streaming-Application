@@ -132,4 +132,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
+  @override
+  String get search_hint => 'Search tracks...';
+
+  @override
+  String get no_search_results => 'Nothing found';
+
+  @override
+  String get try_change_query => 'Try changing your search query';
+
+  @override
+  String get enter_track_or_artist => 'Enter track name or artist';
 }

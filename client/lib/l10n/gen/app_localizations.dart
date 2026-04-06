@@ -337,6 +337,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search tracks...'**
+  String get search_hint;
+
+  /// No description provided for @no_search_results.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing found'**
+  String get no_search_results;
+
+  /// No description provided for @try_change_query.
+  ///
+  /// In en, this message translates to:
+  /// **'Try changing your search query'**
+  String get try_change_query;
+
+  /// No description provided for @enter_track_or_artist.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter track name or artist'**
+  String get enter_track_or_artist;
 }
 
 class _AppLocalizationsDelegate
