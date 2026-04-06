@@ -42,5 +42,10 @@
   "error_no_internet": "No internet connection.",
   "error_bad_request": "Bad request.",
   "retry": "Retry",
-  "logout": "Logout"
+  "logout": "Logout",
+
+  "search_hint": "Search tracks...",
+  "no_search_results": "Nothing found",
+  "try_change_query": "Try changing your search query",
+  "enter_track_or_artist": "Enter track name or artist"
 }
