@@ -32,7 +32,7 @@ api/pycache/
 .flutter-plugins
 .flutter-plugins-dependencies
 
-data/
+/data/
 minio_data/
 tracks/
 
